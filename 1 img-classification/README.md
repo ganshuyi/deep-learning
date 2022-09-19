@@ -1,5 +1,6 @@
 # **Image Classification**
 
+
 ## **코드 설명** 
 <br/>
 CIFAR-10 이미지 데이터를 분류할 수 있는 artificial neural network 모델 세우는 것이 이 과제의 목표이다. Pytorch를 이용하여 Multi-layer Perceptron을 구현한다.
@@ -56,7 +57,65 @@ Pytorch library 모듈에서 제공된 Adaptive Moment Estimation (ADAM) optimiz
 <br/>
 
 ### **3. SGD Optimizer에 Momentum 적용**
-빠른 학습 속도와 local minima를 문제를 개선하고자 SGD에 관성 개념을 적용한다. 모델 학습 위해 돌리는 반복횟수를 조정하여 모델 예측 정확도를 기록한다. Epoch을 늘려도 어느 시점부터는 오히려 정확도가 떨어지며 optimal epoch은 90으로 설정할 때 정확도가 **52.51%**로 측정되었다.
+빠른 학습 속도와 local minima를 문제를 개선하고자 SGD에 관성 개념을 적용한다. 모델 학습 위해 돌리는 반복횟수를 조정하여 모델 예측 정확도를 기록한다. Epoch을 늘려도 어느 시점부터는 오히려 정확도가 떨어지며 optimal epoch은 90으로 설정할 때 정확도가 **52.51**%로 측정되었다.
 
+
+<br/>
+
+## **Code Explanation**
+<br/>
+
+The goal of this assignment is to train an artificial neural network to classify the CIFAR-10 image dataset. A multi-layer perceptron is created using Pytorch.
+
+### **1. Loading the dataset**
+Using `torchvision`, the CIFAR-10 training and test datasets are loaded. The CIFAR-10 dataset consists of 60,000 32x32 color images (RGB) in 10 classes, with 6,000 images per class. Normalization method is applied to the dataset, thus the images are transformed to Tensors of normalized range [0.0, 1.0].
+- CIFAR-10 mean: 0.4914, 0.4822, 0.4465
+- CIFAR-10 standard deviation: 0.247, 0.243, 0.261
+
+<br/>
+
+### **2. Defining the model**
+A multi-layer perceptron is created. The model consists of 3 linear layers. The dimension of the model is as follows.
+- 1st layer
+    - Input size: 32 * 32 * 3
+    - Output size: 256
+- 2nd layer
+    - Input size: 256
+    - Output size: 128
+- 3rd layer
+    - Input size: 128
+    - Output size: 10
+
+<br/>
+
+### **3. Defining loss function & optimizer**
+Cross entropy loss function is set as the loss function whereas Stochastic Gradient Descent (SGD) with momentum is set as the optimizer.
+
+<br/>
+
+### **4. Training the model**
+The image dataset is looped over repeatedly, fed as input to the MLP model and optimized. The epochs (number of iterations) is set to an arbitrary value. Through multiple tries, the optimal number of iterations for training is found. Forward propagation is performed on the input values, and loss (error) is calculated. To prevent the model from overfitting, L2 regularization is performed, by adding a term to the error function used by the training algorithm to penalize large weight values. Back propagation is then performed, where the weights of the model is fine-tuned based on the error rate obtained in the previous epoch. This process is repeated over multiple iterations to train the model. 
+
+<br/>
+
+## **Experiment results**
+<br/>
+
+After training the model with the training dataset, the performance of the model is evaluated by feeding it with the test dataset where it predicts the class label of those inputs. To improve the accuracy of the model's predictions, the model's hyperparameters are tuned and various optimization techniques are applied.
+
+<br/>
+
+### **1. Applying regularization technique**
+L2 regularization, drop-out and normalization techniques are applied onto the model, and its prediction accuracy on the test set is recorded. Stochastic Gradient Descent (SGD) function is used as the optimizer function.
+
+<br/>
+
+### **2. Applying ADAM optimizer**
+Adaptive Moment Estimation (ADAM) optimizer provided by the Pytorch library is applied. The hyperparameters of the model, i.e., number of iterations (epoch), learning rate, etc., are adjusted and the performance of the model is evaluated.
+
+<br/>
+
+### **3. Applying SGD optimizer with momentum**
+To allow fast convergence and avoid the local optima problem, SGD is applied with the principle of momentum. The number of iterations (epoch) are adjusted whilst testing the model. At some point, the accuracy of the model falls even when increasing the epoch number. Through multiple evaluations, the optimal epoch is found to be 90, where the accuracy of the model is recorded as **52.51%**.
 
 
