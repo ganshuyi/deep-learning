@@ -67,6 +67,8 @@ Pytorch library 모듈에서 제공된 Adaptive Moment Estimation (ADAM) optimiz
 
 The goal of this assignment is to train an artificial neural network to classify the CIFAR-10 image dataset. A multi-layer perceptron is created using Pytorch.
 
+<br/>
+
 ### **1. Loading the dataset**
 Using `torchvision`, the CIFAR-10 training and test datasets are loaded. The CIFAR-10 dataset consists of 60,000 32x32 color images (RGB) in 10 classes, with 6,000 images per class. Normalization method is applied to the dataset, thus the images are transformed to Tensors of normalized range [0.0, 1.0].
 - CIFAR-10 mean: 0.4914, 0.4822, 0.4465
